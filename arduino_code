@@ -1,0 +1,43 @@
+long duration;
+int distance;
+int buzzer = 2;
+
+int echopin = 11;
+int triggerpin = 9;
+void setup() {
+  pinMode(echopin,INPUT);
+  pinMode(triggerpin,OUTPUT);
+  Serial.begin(115200);
+  pinMode(8,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(2,OUTPUT);
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  digitalWrite(triggerpin,LOW);
+  delayMicroseconds(2);
+  digitalWrite(triggerpin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerpin,LOW);
+  duration = pulseIn(echopin,HIGH);
+  distance = duration*0.034/2;
+  Serial.print("distance:");
+  Serial.println(distance);
+  if(distance<=15)
+  {
+    digitalWrite(8,HIGH);
+    digitalWrite(12,LOW);
+    digitalWrite(2,HIGH);
+  }
+  else 
+  {
+    digitalWrite(8,LOW);
+    digitalWrite(12,HIGH);
+    digitalWrite(2,LOW);
+  }
+
+  // put your main code here, to run repeatedly:
+
+}
